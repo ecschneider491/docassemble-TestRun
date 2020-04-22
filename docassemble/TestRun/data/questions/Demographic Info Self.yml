@@ -1,0 +1,61 @@
+objects:
+  - user: Individual
+---
+code: |                      
+  user.name.first
+  user.birthdate
+  user.gender
+  user.address.address
+  user.phone_number_mobile
+  ran_interview_file_Demographic_self_logic = True
+---                     
+question: | 
+  What is your name? 
+fields:
+  - First name: user.name.first 
+  - Middle name: user.name.middle
+    required: False
+  - Last name: user.name.last
+  - Maiden name: user.name.maiden
+    required: False
+  - Aliases: user.name.alias
+    required: False  
+---
+question: |
+  What is your date of birth?
+fields:
+  - no label: user.birthdate
+    datatype: date
+---
+question: | 
+  What is your gender? 
+field: user.gender
+buttons: 
+  - Male
+  - Female
+  - Prefer not to answer
+---
+question: |
+  What is your home address? 
+fields:
+  - Address: user.address.address
+  - Unit: user.address.unit
+    required: False
+  - City: user.address.city
+  - State: user.address.state
+    code: states_list()
+  - Zip Code: user.address.zip
+---
+question: |
+  Please provide your contact information so that we can get in touch with you:
+subquestion: |
+  If you not have one or more of the below contact methods, please fill information for the methods that apply.
+fields:
+  - Mobile phone: user.phone_number_mobile
+    required: False
+  - Home phone: user.phone_number_home
+    required: False
+  - Email Address: user.email 
+    required: False
+  - What is your preferred contact method: preferred_conact_method
+continue button field: ran_interview_file_Demographic_self_logic

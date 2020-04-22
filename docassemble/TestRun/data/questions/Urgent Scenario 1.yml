@@ -1,0 +1,123 @@
+code: |                    
+  if familial_relation == 'Self':
+    self_date_of_custody
+    self_name_of_town
+    self_location_of_detention
+    self_time_of_detention
+    additional_detention_description
+    self_detention_location
+  else:
+    tp_date_of_custody
+    tp_name_of_town
+    tp_location_of_detention
+    tp_time_of_detention
+    additional_detention_description
+    tp_detention_location
+    have_spoken_since_detention
+  ran_interview_file_U1_logic = True
+---
+question: |
+  What is your relationship to the person taken into custody?
+field: familial_relation
+choices: 
+  - Self
+  - Spouse/Domestic Partner
+  - Parent/Step-Parent
+  - Sibling
+  - Child
+  - Cousin
+  - Aunt/Uncle
+  - Friend
+---
+question: |
+  On what date was this person taken into custody?
+fields:
+  - Date: tp_date_of_custody
+    datatype: date
+---
+question: |
+  In what town or city and state was this person detained?
+fields:
+  - Town or City: tp_name_of_town
+  - State: tp_state_name
+    code: |
+      states_list()
+---
+question: |
+  More specifically, this person was detained:
+field: tp_location_of_detention 
+choices:
+  - During a vehicle traffic stop
+  - While on the way to or from work
+  - At his/her workplace
+  - At home
+  - None of the above
+---
+question: |
+  What time of day was this person detained?
+field: tp_time_of_detention
+choices:
+  - Early morning (12am-6am)
+  - Morning (6am-12pm)
+  - Afternoon (12pm-6pm)
+  - Night (6pm-12am)
+---
+question: |
+  If desired, provide additional context describing the circumstances surrounding the detention.
+fields:
+  - no label: additional_detention_description
+    input type: area
+    required: False
+---
+question: |
+  Where is this person being held?
+subquestion: |
+  INSERT EXAMPLES HERE!!!
+fields:
+  - no label: tp_detention_location
+---
+question: |
+  Have you been able to speak with this person since he/she was detained?
+yesno: have_spoken_since_detention
+continue button field: ran_interview_file_U1_logic
+---
+question: |
+  On what date were you taken into custody?
+fields:
+  - Date: self_date_of_custody
+    datatype: date
+---
+question: |
+  In what town or city and state were you detained?
+fields:
+  - Town or City: self_name_of_town
+  - State: self_state_name
+    code: |
+      states_list()
+---
+question: |
+  More specifically, this person was detained:
+field: self_location_of_detention 
+choices:
+  - During a vehicle traffic stop
+  - While on the way to or from work
+  - At his/her workplace
+  - At home
+  - None of the above
+---
+question: |
+  What time of day were you detained?
+field: self_time_of_detention
+choices:
+  - Early morning (12am-6am)
+  - Morning (6am-12pm)
+  - Afternoon (12pm-6pm)
+  - Night (6pm-12am)
+---
+question: |
+  Where are you being held?
+subquestion: |
+  INSERT EXAMPLES HERE!!!
+fields:
+  - no label: self_detention_location
+continue button field: ran_interview_file_U1_logic

@@ -1,0 +1,143 @@
+objects:
+  - mother: Individual
+  - father: Individual
+---
+code: |
+  have_been_arrested_cited_etc
+  if has_copy_of_CORI:
+    CORI_up_to_date
+    user_CORI_form
+  else:
+    if user_needs_help_to_obtain:
+      if user_has_SSN:
+        last_6_of_SSN
+        mother.name.first
+        father.name.first
+        if has_MA_ID:
+          ID_number
+          if difficulty_paying_CORI_fee:
+            if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+              public_benefits_received
+            elif reason_for_difficulty_paying == "Other":
+              reason_for_difficulty_paying_other
+        else:
+          continue_to_CORI_fee_questions
+          if difficulty_paying_CORI_fee:
+            if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+              public_benefits_received
+            elif reason_for_difficulty_paying == "Other":
+              reason_for_difficulty_paying_other
+      else:
+        mother.name.first
+        father.name.first
+        if has_MA_ID:
+          ID_number
+          if difficulty_paying_CORI_fee:
+            if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+              public_benefits_received
+            elif reason_for_difficulty_paying == "Other":
+              reason_for_difficulty_paying_other
+        else:
+          continue_to_CORI_fee_questions
+          if difficulty_paying_CORI_fee:
+            if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+              public_benefits_received
+            elif reason_for_difficulty_paying == "Other":
+              reason_for_difficulty_paying_other
+  ran_interview_file_CORI_logic = True
+---
+question: |
+  Have you ever been arrested, cited, detained, charged, or convicted for committing a crime, even if you've never served time in jail?
+yesno: have_been_arrested_cited_etc
+---
+question: |
+  Do you have a copy of your Massachusetts CORI Record?
+yesno: has_copy_of_CORI
+---
+question: |
+  Is this record less than one year old and up to date?
+yesno: CORI_up_to_date
+---
+question: |
+  Please upload a copy of your CORI Record here (.pdf, .jpg, .png files all acceptable). 
+fields:
+  - CORI Form: user_CORI_form
+    datatype: file
+---
+question: |
+  In order to assist further, we need a copy of your CORI record. Do you need help obtaining your CORI Record?
+yesno: user_needs_help_to_obtain
+---
+question: |
+  We can request your CORI record on your behalf. Please answer the following personal questions so that we're able to do that for you.
+subquestion: |
+  Do you have a social security number?
+yesno: user_has_SSN
+---
+question: |
+  What are the last 6 digits of your social security number?
+fields:
+  - Last 6 digits: last_6_of_SSN
+---
+question: |
+  What is your mother's full legal name?
+Fields:
+  - First Name: mother.name.first
+  - Middle Name: mother.name.middle
+    required: False
+  - Last Name: mother.name.last
+---
+question: |
+  What is your father's full legal name?
+Fields:
+  - First Name: father.name.first
+  - Middle Name: father.name.middle
+    required: False
+  - Last Name: father.name.last
+---
+question: |
+  Do you have a Massachusetts State ID or Driver's License?
+yesno: has_MA_ID
+---
+question: |
+  What is the ID/License number?
+fields:
+  - ID/License number: ID_number
+---
+question: |
+  You will need to fill out a paper form and have it notarized. Greater Boston Legal Services can help you with this. Please contact us at XXX-XXX-XXXX for assistance.
+continue button field: continue_to_CORI_fee_questions
+---
+question: |
+  In order to obtain your CORI record, there is a $25 fee? Would you have difficulty paying this fee?
+yesno: difficulty_paying_CORI_fee
+---
+question: |
+  Please select the reason why you would have difficulty paying below: 
+field: reason_for_difficulty_paying
+choices:
+  - I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits
+  - My household income is less than 125% of the poverty level (currently $XX,XXX)
+  - I am unable to pay the fees and costs, or I am unable to do so without depriving myself or my dependents of the necessities of life, including food, shelter and clothing
+  - I am currently incarcerated
+  - Other
+---
+question: |
+  Select all that apply:
+fields: 
+  - no label: public_benefits_received
+    datatype: checkboxes
+    choices:
+      - SSI
+      - TAFDC
+      - EAEDC
+      - MassHealth
+      - Massachusetts Veterans Benefits
+    none of the above: False
+---
+question: |
+  Please elaborate:
+fields:
+  - no label: reason_for_difficulty_paying_other
+    datatype: area
+continue button field: ran_interview_file_CORI_logic
