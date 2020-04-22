@@ -1,0 +1,163 @@
+code: |                                    
+  continue_from_intro                          #Reason for Outreach
+  if user.language is not 'English':
+    if needs_translator:
+      no_english_ending_screen
+  else:
+    if reason_variable == 'My family member or relative has been detained in Immigration and Customs Enforcement (ICE) custody.':
+    
+      if familial_relation == 'Self':             #Urgent Scenario 1
+        self_date_of_custody
+        self_name_of_town
+        self_location_of_detention
+        self_time_of_detention
+        additional_detention_description
+        self_detention_location
+        #ran_interview_file_U1_logic = True
+        
+          have_been_arrested_cited_etc                  #CORI Info
+          if has_copy_of_CORI:
+            CORI_up_to_date
+            user_CORI_form
+          else:
+            if user_needs_help_to_obtain:
+              if user_has_SSN:
+                last_6_of_SSN
+                mother.name.first
+                father.name.first
+                if has_MA_ID:
+                  ID_number
+                  if difficulty_paying_CORI_fee:
+                    if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                      public_benefits_received
+                    elif reason_for_difficulty_paying == "Other":
+                      reason_for_difficulty_paying_other
+                else:
+                  continue_to_CORI_fee_questions
+                  if difficulty_paying_CORI_fee:
+                    if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                      public_benefits_received
+                    elif reason_for_difficulty_paying == "Other":
+                      reason_for_difficulty_paying_other
+              else:
+                mother.name.first
+                father.name.first
+                if has_MA_ID:
+                  ID_number
+                  if difficulty_paying_CORI_fee:
+                    if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                      public_benefits_received
+                    elif reason_for_difficulty_paying == "Other":
+                      reason_for_difficulty_paying_other
+                else:
+                  continue_to_CORI_fee_questions
+                  if difficulty_paying_CORI_fee:
+                    if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                      public_benefits_received
+                    elif reason_for_difficulty_paying == "Other":
+                      reason_for_difficulty_paying_other
+                      ran_interview_file_CORI_logic = True
+            else:
+              no_CORI_ending_screen
+              have_been_arrested_cited_etc                  #CORI Info
+              if has_copy_of_CORI:
+                CORI_up_to_date
+                user_CORI_form
+              else:
+                if user_needs_help_to_obtain:
+                  if user_has_SSN:
+                    last_6_of_SSN
+                    mother.name.first
+                    father.name.first
+                    if has_MA_ID:
+                      ID_number
+                      if difficulty_paying_CORI_fee:
+                        if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                          public_benefits_received
+                        elif reason_for_difficulty_paying == "Other":
+                          reason_for_difficulty_paying_other
+                    else:
+                      continue_to_CORI_fee_questions
+                      if difficulty_paying_CORI_fee:
+                        if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                          public_benefits_received
+                        elif reason_for_difficulty_paying == "Other":
+                          reason_for_difficulty_paying_other
+                        else:
+                          mother.name.first
+                          father.name.first
+                          if has_MA_ID:
+                            ID_number
+                            if difficulty_paying_CORI_fee:
+                              if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                                public_benefits_received
+                              elif reason_for_difficulty_paying == "Other":
+                                reason_for_difficulty_paying_other
+                              else:
+                                continue_to_CORI_fee_questions
+                                if difficulty_paying_CORI_fee:
+                                  if reason_for_difficulty_paying == "I currently receive public benefits from SSI, TAFDC, EAEDC, MassHealth or Massachusetts Veterans Benefits":
+                                    public_benefits_received
+                                  elif reason_for_difficulty_paying == "Other":
+                                    reason_for_difficulty_paying_other
+                                    ran_interview_file_CORI_logic = True
+                                    user.name.first        #Demo Info Self
+                                    user.birthdate
+                                    user.gender
+                                    user.address.address
+                                    user.phone_number_mobile
+                                    ran_interview_file_Demographic_self_logic = True
+      else:
+        tp_date_of_custody
+        tp_name_of_town
+        tp_location_of_detention
+        tp_time_of_detention
+        additional_detention_description
+        tp_detention_location
+        have_spoken_since_detention
+          
+        user.name.first                                 #Demo Info Self
+        user.birthdate
+        user.gender
+        user.address.address
+        user.phone_number_mobile
+        ran_interview_file_Demographic_self_logic = True
+      
+        user.name.first                                   #Demo Info 3P
+        user.birthdate
+        user.gender
+        user.address.address
+        user.phone_number_mobile
+        ran_interview_file_Demographic_tp_logic = True
+        
+    if reason_variable == 'I received an early check in appointment letter with Department of Homeland Security’s Immigration and Custom Enforcement.':
+    
+      same_as_regular_checkin                            #Urgent Scenario 2
+      date_to_appear
+      date_letter_received
+      location_of_hearing
+      if reason_for_appointment_exists:
+        letter_reason_description
+      else:
+        
+    if reason_variable == 'I have an upcoming hearing scheduled before an immigration judge.':
+      hearing_for_removal_proceeding          #Urgent Scenario 3
+      date_of_hearing
+      hearing_location
+      type_of_hearing
+      if received_notice_to_appear:
+        if notice_contained_hearing_date:
+        date_of_hearing_on_notice
+        reason_provided
+        if attorney_already_representing:
+          attorney.name.first
+      else:
+        reason_provided
+        if attorney_already_representing:
+          attorney.name.first
+      else:
+        if attorney_already_representing:
+          attorney.name.first
+    if reason_variable == 'I need assistance with something else.':         
+        nonurgent_reason                        #Non-Urgent Scenarios
+        additional_immigration_questions

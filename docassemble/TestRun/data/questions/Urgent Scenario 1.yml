@@ -96,7 +96,7 @@ fields:
       states_list()
 ---
 question: |
-  More specifically, this person was detained:
+  More specifically, you were detained:
 field: self_location_of_detention 
 choices:
   - During a vehicle traffic stop
