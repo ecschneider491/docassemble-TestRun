@@ -45,7 +45,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.TestRun',
       version='0.0.1',
       description=('A docassemble extension.'),
-      long_description='# docassemble.TestRun\n\nA docassemble extension.\n\n## Author\n\nEllen Schneider, eschneider2@suffolk.edu\n\n',
+      long_description='# docassemble.TestRun\r\n\r\nA docassemble extension.\r\n\r\n## Author\r\n\r\nEllen Schneider, eschneider2@suffolk.edu\r\n\r\n',
       long_description_content_type='text/markdown',
       author='Ellen Schneider',
       author_email='eschneider2@suffolk.edu',
