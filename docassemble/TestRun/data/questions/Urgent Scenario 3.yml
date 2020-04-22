@@ -1,0 +1,95 @@
+objects:
+  - attorney: Person 
+---
+code: |
+  hearing_for_removal_proceeding
+  date_of_hearing
+  hearing_location
+  type_of_hearing
+  if received_notice_to_appear:
+    if notice_contained_hearing_date:
+      date_of_hearing_on_notice
+      reason_provided
+      if attorney_already_representing:
+        attorney.name.first
+    else:
+      reason_provided
+      if attorney_already_representing:
+        attorney.name.first
+  else:
+    if attorney_already_representing:
+      attorney.name.first
+  ran_interview_file_U3_logic = True
+---
+question: |
+  Is the upcoming hearing for a removal proceeding?
+yesno: hearing_for_removal_proceeding
+---
+question: |
+  What is the date, time and location of the upcoming hearing?
+subquestion: |
+  INSERT LOCATION EXAMPLES HERE!!!!
+fields:
+  - Date: date_of_hearing
+    datatype: date
+  - Time: time_of_hearing
+    datatype: time
+  - Location: hearing_location
+---
+question: |
+  What type of hearing is this?
+subquestion:
+  Ex. = Master Calendar, Individual Hearing, Unknown
+fields:
+  - no label: type_of_hearing
+---
+question: |
+  Did you receive a document called a "Notice to Appear" at any point prior to this notice?
+yesno: received_notice_to_appear
+---
+question: |
+  Did the Notice to Appear contain a hearing date?
+yesno: notice_contained_hearing_date
+---
+question: |
+  What is the hearing date shown on the Notice to Appear?
+fields:
+  Date: date_of_hearing_on_notice
+  datatype: date
+---
+question: |
+  What is the provided reason for the hearing in the Notice to Appear?
+fields:
+  - no label: reason_provided
+    datatype: area
+---
+question: |
+  Is an attorney currently representing you on this immigration matter?
+yesno: attorney_already_representing
+---
+question: |
+  What is your attorney's name and contact information?
+fields:
+  - First Name: attorney.name.first
+  - Last Name: attorney.name.last
+  - Office Address: attorney.address.address
+    address autocomplete: True
+    required: False
+  - Apt/Unit: attorney.address.unit
+    required: False
+  - City: attorney.address.city
+    required: False
+  - State: attorney.address.state
+    code: states_list()
+    required: False
+  - Zip: attorney.address.zip
+    required: False
+  - E-mail Address: attorney.email
+    required: False
+  - Phone Number: attorney.phone_number
+    required: False
+---
+question: |
+  Will your attorney be representing you at this upcoming hearing?
+yesno: attorney_will_represent
+continue button field: ran_interview_file_U3_logic

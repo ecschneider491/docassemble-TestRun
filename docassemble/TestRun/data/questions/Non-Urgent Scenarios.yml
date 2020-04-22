@@ -1,0 +1,27 @@
+code: | 
+  nonurgent_reason
+  additional_immigration_questions
+  ran_interview_file_NONU_logic = True
+---
+question: |
+  Ok, how can we help you? 
+fields:
+  - "Please select all that apply": nonurgent_reason
+    datatype: checkboxes
+    choices:
+      - I have previously been arrested, cited, detained or charged for committing a crime and have questions about my immigration status. 
+      - I have a Final Order of Removal and I am under Order of Supervision. 
+      - I had my green card taken away. 
+      - I have questions about my eligibility for naturalization. 
+      - I am currently undocumented and want to know my legal options. 
+      - I have other questions about my immigration status. 
+---
+question: |
+  Thank you.  
+subquestion: | 
+    If you have any other questions about your immigration status, please enter them here: 
+fields: 
+  - no label: additional_immigration_questions 
+    input type: area
+    required: False
+continue button field: ran_interview_file_NONU_logic
